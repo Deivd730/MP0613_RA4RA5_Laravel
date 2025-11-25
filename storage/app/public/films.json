@@ -39,5 +39,13 @@
         "img_url": "https://pics.filmaffinity.com/As_bestas-275688233-large.jpg",
         "country": "Spain",
         "time" : 85
+    },
+    {
+        "name": "Copia - El Club de los Cinco",
+        "year": 1985,
+        "genre": "Comedia",
+        "img_url": "https://pics.filmaffinity.com/El_club_de_los_cinco-192309838-large.jpg",
+        "country": "Spain",
+        "time" : 85
     }
 ]
