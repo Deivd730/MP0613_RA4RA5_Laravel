@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ $title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+
+        <h1>{{ $title }}</h1>
+
+        <div class="alert alert-primary" role="alert">
+            Total de películas disponibles: <strong>{{ $count }}</strong>
+        </div>
+
+    </div>
+</body>
+
+</html>

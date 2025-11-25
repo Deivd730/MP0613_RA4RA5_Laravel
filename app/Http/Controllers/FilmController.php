@@ -63,19 +63,22 @@ class FilmController extends Controller
         return view('films.list', ['films' => $new_films, 'title' => $title]);
     }
 
+    /**
+     * List films filtered by year
+     */
     public function listFilmsByYear($year = null)
     {
         $films_filtered = [];
-        $title = 'Listado de todas las pelis filtrado x año';
+        $title = 'Listado de todas las pelis';
         $films = FilmController::readFilms();
 
-        usort($films, function ($a, $b) {
-            return $a['year'] <=> $b['year'];
-        });
-
+        // Si no se pasa año, devolvemos la lista tal cual (sin ordenar)
         if (is_null($year)) {
-            return view('films.list', ['films' => $films, 'title' => 'Listado de todas las pelis']);
+            return view('films.list', ['films' => $films, 'title' => $title]);
         }
+
+        // Solo filtramos
+        $title = 'Listado de todas las pelis filtrado x año';
 
         foreach ($films as $film) {
             if ($film['year'] == $year) {
@@ -89,16 +92,16 @@ class FilmController extends Controller
     public function listFilmsByGenre($genre = null)
     {
         $films_filtered = [];
-        $title = 'Listado de todas las pelis filtrado x categoria';
+        $title = 'Listado de todas las pelis';
         $films = FilmController::readFilms();
 
-        usort($films, function ($a, $b) {
-            return strtolower($a['genre']) <=> strtolower($b['genre']);
-        });
-
+        // Si no se pasa género, devolvemos la lista tal cual (sin ordenar)
         if (is_null($genre)) {
-            return view('films.list', ['films' => $films, 'title' => 'Listado de todas las pelis']);
+            return view('films.list', ['films' => $films, 'title' => $title]);
         }
+
+        // Solo filtramos
+        $title = 'Listado de todas las pelis filtrado x categoria';
 
         foreach ($films as $film) {
             if (strtolower($film['genre']) == strtolower($genre)) {
@@ -107,5 +110,17 @@ class FilmController extends Controller
         }
 
         return view('films.list', ['films' => $films_filtered, 'title' => $title]);
+    }
+
+    public function countFilms()
+    {
+
+        $films = FilmController::readFilms();
+
+        $count = count($films);
+
+        $title = 'Contador de Películas';
+
+        return view('films.count', ['count' => $count, 'title' => $title]);
     }
 }
