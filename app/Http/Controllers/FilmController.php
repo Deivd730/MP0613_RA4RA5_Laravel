@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
@@ -14,6 +15,10 @@ class FilmController extends Controller
         $films = Storage::json('/public/films.json');
 
         return $films;
+    }
+
+    public function createFilm(Request $request)
+    {
     }
 
     /**
@@ -123,7 +128,7 @@ class FilmController extends Controller
 
         return view('films.count', ['count' => $count, 'title' => $title]);
     }
-    
+
     //Funcion para ordenar por año
     public function sortFilmsByYear()
     {
@@ -131,7 +136,8 @@ class FilmController extends Controller
         usort($films, function ($a, $b) {
             return $a['year'] <=> $b['year'];
         });
-        $title = "Listado de pelis ordenadas por año";
+        $title = 'Listado de pelis ordenadas por año';
+
         return view('films.list', ['films' => $films, 'title' => $title]);
     }
 }
