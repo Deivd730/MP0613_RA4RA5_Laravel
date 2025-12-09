@@ -17,8 +17,33 @@ class FilmController extends Controller
         return $films;
     }
 
+    /**
+     * Create films
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function createFilm(Request $request)
     {
+        $films = FilmController::readFilms();
+        $newFilm = [
+            'name' => $request->input('name'),
+            'year' => $request->input('year'),
+            'genre' => $request->input('genre'),
+            'country' => $request->input('country'),
+            'time' => $request->input('time'),
+            'img_url' => $request->input('img_url'),
+        ];
+
+        foreach ($films as $film) {
+            if ($film['name'] === $newFilm['name']) {
+                return view('welcome', ['error' => 'Film already exists']);
+            }
+        }
+
+        $films[] = $newFilm;
+        Storage::put('/public/films.json', json_encode($films));
+
+        return view('welcome', ['success' => 'Film created successfully']);
     }
 
     /**
