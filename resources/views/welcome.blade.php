@@ -14,6 +14,12 @@
     </ul>
 
     <h2 class="mt-4">Añadir Película</h2>
+    @if (isset($success))
+        <div class="alert alert-success">{{ $success }}</div>
+    @endif
+    @if (isset($error))
+        <div class="alert alert-danger">{{ $error }}</div>
+    @endif
 
     <form action="{{ route('createFilm') }}" method="POST">
         @csrf
