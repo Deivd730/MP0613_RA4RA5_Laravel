@@ -19,12 +19,17 @@ class FilmController extends Controller
 
     /**
      * Create films
-     * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function createFilm(Request $request)
     {
+        if ($this->isFilm($request->input('name'))) {
+            return back()->with('error', 'Film already exists');
+        }
+
         $films = FilmController::readFilms();
+
         $newFilm = [
             'name' => $request->input('name'),
             'year' => $request->input('year'),
@@ -34,16 +39,11 @@ class FilmController extends Controller
             'img_url' => $request->input('img_url'),
         ];
 
-        foreach ($films as $film) {
-            if ($film['name'] === $newFilm['name']) {
-                return view('welcome', ['error' => 'Film already exists']);
-            }
-        }
-
+        // 3. Guardamos
         $films[] = $newFilm;
         Storage::put('/public/films.json', json_encode($films));
 
-        return view('welcome', ['success' => 'Film created successfully']);
+        return redirect()->route('listAll');
     }
 
     /**
@@ -102,12 +102,10 @@ class FilmController extends Controller
         $title = 'Listado de todas las pelis';
         $films = FilmController::readFilms();
 
-        // Si no se pasa año, devolvemos la lista tal cual (sin ordenar)
         if (is_null($year)) {
             return view('films.list', ['films' => $films, 'title' => $title]);
         }
 
-        // Solo filtramos
         $title = 'Listado de todas las pelis filtrado x año';
 
         foreach ($films as $film) {
@@ -125,12 +123,10 @@ class FilmController extends Controller
         $title = 'Listado de todas las pelis';
         $films = FilmController::readFilms();
 
-        // Si no se pasa género, devolvemos la lista tal cual (sin ordenar)
         if (is_null($genre)) {
             return view('films.list', ['films' => $films, 'title' => $title]);
         }
 
-        // Solo filtramos
         $title = 'Listado de todas las pelis filtrado x categoria';
 
         foreach ($films as $film) {
@@ -164,5 +160,29 @@ class FilmController extends Controller
         $title = 'Listado de pelis ordenadas por año';
 
         return view('films.list', ['films' => $films, 'title' => $title]);
+    }
+
+    public function listAllFilms()
+    {
+        $films = FilmController::readFilms();
+        $title = 'Listado de todas las pelis';
+
+        return view('films.list', ['films' => $films, 'title' => $title]);
+    }
+
+    public function isFilm(string $name)
+    {
+        if ($name === '') {
+            return false;
+        }
+
+        $films = FilmController::readFilms();
+        foreach ($films as $film) {
+            if ($film['name'] === $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
