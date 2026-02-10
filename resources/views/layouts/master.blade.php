@@ -11,7 +11,7 @@
 </head>
 
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 bg-light">
 
     <header class="bg-primary text-white p-3 mb-4">
         <div class="container d-flex justify-content-between align-items-center">

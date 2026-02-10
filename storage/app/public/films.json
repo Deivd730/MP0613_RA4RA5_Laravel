@@ -46,5 +46,29 @@
         "img_url": "https:\/\/pics.filmaffinity.com\/El_club_de_los_cinco-192309838-large.jpg",
         "country": "Spain",
         "time": 85
+    },
+    {
+        "name": "asdasd",
+        "year": "1",
+        "genre": "dqwd",
+        "country": "qwdwq",
+        "time": "1",
+        "img_url": "https:\/\/david.com"
+    },
+    {
+        "name": "David",
+        "year": "1",
+        "genre": "dqwd",
+        "country": "qwdwq",
+        "time": "1",
+        "img_url": "https:\/\/david.com"
+    },
+    {
+        "name": "Peli1",
+        "year": "2000",
+        "genre": "Accion",
+        "country": "Espa\u00f1a",
+        "time": "190",
+        "img_url": "https:\/\/david.com"
     }
 ]
