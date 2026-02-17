@@ -47,7 +47,7 @@
             @endif
 
             <div class="card p-3 shadow-sm">
-                <form action="{{ route('film') }}" method="POST">
+                <form action="{{ route('createFilm') }}" method="POST">
                     @csrf
 
                     <div class="row mb-2">
