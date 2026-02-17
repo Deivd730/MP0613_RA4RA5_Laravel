@@ -28,6 +28,12 @@ class FilmController extends Controller
             return back()->with('error', 'Film already exists');
         }
 
+        // Validate year is between 1900 and 2024
+        $year = (int) $request->input('year');
+        if ($year < 1900 || $year > 2024) {
+            return back()->with('error', 'Film year must be between 1900 and 2024');
+        }
+
         $films = FilmController::readFilms();
 
         $newFilm = [

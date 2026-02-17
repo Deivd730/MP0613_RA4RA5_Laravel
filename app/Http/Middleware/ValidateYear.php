@@ -23,6 +23,11 @@ class ValidateYear
             if(is_null($year) || !is_numeric($year)){
                   return redirect('/');
             }
+            // Validate year is between 1900 and 2024
+            $yearInt = (int) $year;
+            if ($yearInt < 1900 || $yearInt > 2024) {
+                return redirect('/');
+            }
         }
         return $next($request);        
     }

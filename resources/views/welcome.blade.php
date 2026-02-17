@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="year" class="form-label">Año</label>
-                            <input type="number" class="form-control" id="year" name="year" required>
+                            <input type="number" class="form-control" id="year" name="year" min="1900" max="2024" required>
                         </div>
                     </div>
 
