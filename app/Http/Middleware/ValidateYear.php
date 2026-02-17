@@ -16,19 +16,16 @@ class ValidateYear
      */
     public function handle(Request $request, Closure $next)
     {
-        $year = $request->route('year');
-
-        // in case year is not numeric go to homepage
-        if(isset($year)){
-            if(is_null($year) || !is_numeric($year)){
-                  return redirect('/');
-            }
-            // Validate year is between 1900 and 2024
-            $yearInt = (int) $year;
-            if ($yearInt < 1900 || $yearInt > 2024) {
+        $year = $request->route('year') ?? $request->input('year');
+        
+        if (!is_numeric($year) || (int)$year < 1900 || (int)$year > 2024) {
+                                
+                if ($request->isMethod('post')) {
+                    return back()->with('error', 'El año de la película debe estar entre 1900 y 2024');
+                }
+                                
                 return redirect('/');
-            }
-        }
-        return $next($request);        
+            }        
+        return $next($request);
     }
 }
