@@ -18,6 +18,10 @@ class ValidateYear
     {
         $year = $request->route('year') ?? $request->input('year');
         
+        if (is_null($year)) {
+            return $next($request);
+        }
+
         if (!is_numeric($year) || (int)$year < 1900 || (int)$year > 2024) {
                                 
                 if ($request->isMethod('post')) {
