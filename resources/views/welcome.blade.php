@@ -86,6 +86,11 @@
                     <button type="submit" class="btn btn-primary w-100">Añadir</button>
                 </form>
             </div>
+
+            <h2 class="mt-4">Lista de Actores</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{{ route('actors') }}">Ver todos los actores</a></li>
+            </ul>
         </div>
     </div>
 
