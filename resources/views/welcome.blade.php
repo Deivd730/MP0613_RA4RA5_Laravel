@@ -91,6 +91,26 @@
             <ul class="list-group">
                 <li class="list-group-item"><a href="{{ route('actors') }}">Ver todos los actores</a></li>
             </ul>
+
+            <h2 class="mt-4">Buscar actores por criterio</h2>
+            <div class="card p-3 shadow-sm">
+                <form action="{{ route('listActorsByDecade') }}" method="GET">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-md-8">
+                            <label for="actorYear" class="form-label">Decada nacimiento</label>
+                            <select class="form-select" id="actorYear" name="year" required>
+                                <option value="">Elige una opcion</option>
+                                @for ($year = 1980; $year <= 2020; $year += 10)
+                                    <option value="{{ $year }}">{{ $year }} - {{ $year + 9 }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-4 d-grid">
+                            <button type="submit" class="btn btn-outline-primary">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
