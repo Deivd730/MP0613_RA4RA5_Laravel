@@ -1,9 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Lista de Actores')
+@section('title', $title ?? 'Lista de Actores')
 
 @section('content')
-    <h1>Lista de Actores</h1>
+    <h1>{{ $title ?? 'Lista de Actores' }}</h1>
+
+    @if (isset($selectedDecade))
+        <p class="text-muted">Decada seleccionada: {{ $selectedDecade }} - {{ $selectedDecade + 9 }}</p>
+    @endif
 
     @if ($actors->isEmpty())
         <div class="alert alert-danger">No se ha encontrado ningún actor</div>

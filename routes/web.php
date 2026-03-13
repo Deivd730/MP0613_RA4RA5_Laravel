@@ -33,13 +33,18 @@ Route::middleware('year')->group(function () {
     });
 });
 
-Route::middleware('url','year')->group(function () {
+Route::middleware(['url', 'year'])->group(function () {
     Route::group(['prefix' => 'filmin'], function () {
         Route::post('createFilm', [FilmController::class, 'createFilm'])->name('createFilm');
 
     });
 });
 
-Route::group(['prefix' => 'actorout'], function () {
-    Route::get('actors', [ActorController::class, 'listActors'])->name('actors');
+Route::middleware('year')->group(function () {
+    Route::group(['prefix' => 'actorout'], function () {
+        Route::get('actors', [ActorController::class, 'listActors'])->name('actors');
+        Route::get('listActorsByDecade/{year?}', [ActorController::class, 'listActorsByDecade'])
+            ->where('year', '1980|1990|2000|2010|2020')
+            ->name('listActorsByDecade');
+    });
 });
