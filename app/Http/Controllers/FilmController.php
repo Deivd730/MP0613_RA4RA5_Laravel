@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
 {
+    /**
+     * Get all films with their corresponding actors
+     */
+    public function index()
+    {
+        $films = Film::with('actors')->get();
+        return response()->json($films);
+    }
+
     /**
      * Read films from storage
      */
