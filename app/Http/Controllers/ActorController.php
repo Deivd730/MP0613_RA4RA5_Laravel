@@ -41,4 +41,11 @@ class ActorController extends Controller
 
         return view('actors.list', ['actors' => $actors, 'title' => $title, 'selectedDecade' => $startYear]);
     }
+
+    public function countActors(Request $request)
+    {
+        $count = Actor::count();
+        $title = 'Contador de Actores';
+        return view('actors.count', ['count' => $count, 'title' => $title]);
+    }
 }

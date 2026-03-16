@@ -46,5 +46,6 @@ Route::middleware('year')->group(function () {
         Route::get('listActorsByDecade/{year?}', [ActorController::class, 'listActorsByDecade'])
             ->where('year', '1980|1990|2000|2010|2020')
             ->name('listActorsByDecade');
+        Route::get('/countActors', [ActorController::class, 'countActors'])->name('countActors');
     });
 });
